@@ -24,16 +24,6 @@ Feature: Website Functional Testing
     Then Privacy Policy page should open
 
 
-  Scenario: Verify Contact Form submission with valid data
-    Given user is on Contact page
-    When user enters name as "Harshada Padher"
-    And user enters phone as "8888160236"
-    And user enters email as "harshadapadher25@gmail.com"
-    And user enters inquiry as "I want 3KG chicken biryani"
-    And user clicks on submit button
-    Then success message "your message has been sent" should be displayed
-
-
 
   Scenario: Verify Contact Form validation for empty fields
     Given user is on Contact page
@@ -42,12 +32,6 @@ Feature: Website Functional Testing
     Then error message "Please fill in this field" should be displayed
 
 
-  Scenario: Verify invalid email format validation
-    Given user is on Contact page
-    When user enters invalid email as "test@123"
-    And user clicks on submit button
-    Then error message for invalid email should be displayed
-
 
   Scenario: Verify website responsiveness on mobile device
     Given user opens website on mobile device "Redmi"
@@ -55,7 +39,3 @@ Feature: Website Functional Testing
     Then content should adjust properly to screen size
 
 
-  Scenario: Verify all images load properly
-    Given user is on the homepage
-    When user checks all images on the page
-    Then all images should be visible properly

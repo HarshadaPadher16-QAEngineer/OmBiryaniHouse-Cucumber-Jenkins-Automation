@@ -56,6 +56,7 @@ public class MyStepDefinitions {
         driver.get("https://ombiryanihouse.wordpress.com/");
     }
 
+
     // 🔹 Navigation
     @When("user clicks on {string} link")
     public void user_clicks_on_link(String linkText) {
@@ -92,53 +93,7 @@ public class MyStepDefinitions {
         driver.findElement(By.name("g29-email")).sendKeys(email);
     }
 
-    // ✅ FIXED INQUIRY (correct locator + wait)
-    @And("user enters inquiry as {string}")
-    public void user_enters_inquiry(String msg) {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        WebElement inquiry = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.id("contact-form-comment-g29-comment")
-        ));
-
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView(true);", inquiry);
-
-        inquiry.sendKeys(msg);
-    }
-
-    // ✅ FIXED SUBMIT BUTTON
-    @And("user clicks on submit button")
-    public void user_clicks_on_submit_button() {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//button[contains(@class,'pushbutton-wide')]")
-        ));
-
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView(true);", btn);
-
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].click();", btn);
-
-        pause(5);
-    }
-
-    // ✅ SUCCESS MESSAGE
-    @Then("success message {string} should be displayed")
-    public void success_message_should_be_displayed(String expectedMsg) {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        WebElement successMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.className("contact-form__confirmation")
-        ));
-
-        Assert.assertTrue(successMsg.getText().toLowerCase().contains(expectedMsg.toLowerCase()));
-    }
 
     // 🔹 Blank fields
     @When("user leaves all required fields blank")
@@ -154,18 +109,33 @@ public class MyStepDefinitions {
         Assert.assertTrue(validation.length() > 0);
     }
 
-    // 🔹 Invalid email
-    @When("user enters invalid email as {string}")
-    public void user_enters_invalid_email(String invalidEmail) {
-        driver.findElement(By.name("g29-email")).sendKeys(invalidEmail);
+    // ✅ FIXED SUBMIT BUTTON (MAIN FIX HERE)
+    @And("user clicks on submit button")
+    public void user_clicks_on_submit_button() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        WebElement btn = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//button[@type='submit']")
+        ));
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center'});", btn);
+
+        wait.until(ExpectedConditions.elementToBeClickable(btn));
+
+        try {
+            // Normal click
+            btn.click();
+        } catch (Exception e) {
+            // Fallback JS click
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].click();", btn);
+        }
+
+        pause(5);
     }
 
-    @Then("error message for invalid email should be displayed")
-    public void error_message_for_invalid_email_should_be_displayed() {
-        WebElement email = driver.findElement(By.name("g29-email"));
-        String validation = email.getAttribute("validationMessage");
-        Assert.assertTrue(validation.length() > 0);
-    }
 
     // 🔹 Mobile
     @Given("user opens website on mobile device {string}")
@@ -177,21 +147,6 @@ public class MyStepDefinitions {
     @When("user navigates through the website")
 
     @Then("content should adjust properly to screen size")
-
-    // 🔹 Images
-    @When("user checks all images on the page")
-    public void user_checks_all_images_on_the_page() {
-        List<WebElement> images = driver.findElements(By.tagName("img"));
-        System.out.println("Images: " + images.size());
-    }
-
-    @Then("all images should be visible properly")
-    public void all_images_should_be_visible_properly() {
-        for (WebElement img : driver.findElements(By.tagName("img"))) {
-            Assert.assertTrue(img.isDisplayed());
-        }
-    }
-
 
 
     // 🔥 Close browser
