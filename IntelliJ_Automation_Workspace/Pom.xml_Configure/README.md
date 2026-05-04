@@ -1,1 +1,1 @@
-Maven Dependency Management via the pom.xml file. This shows the configuration of essential libraries like Selenium, Cucumber-JVM, and JUnit, ensuring a standardized and easily maintainable build process for the entire automation suite.
+This pom.xml file manages core dependencies like Selenium, Cucumber, and JUnit for a structured BDD framework. I integrated WebDriverManager to automate browser driver setups and utilized Maven for efficient build and execution control. This configuration ensures the automation suite is professional, scalable, and easy to maintain.
