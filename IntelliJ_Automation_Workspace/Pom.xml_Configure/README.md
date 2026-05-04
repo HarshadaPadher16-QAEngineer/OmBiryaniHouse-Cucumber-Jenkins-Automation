@@ -1,1 +1,1 @@
-
+Maven Dependency Management via the pom.xml file. This shows the configuration of essential libraries like Selenium, Cucumber-JVM, and JUnit, ensuring a standardized and easily maintainable build process for the entire automation suite.
