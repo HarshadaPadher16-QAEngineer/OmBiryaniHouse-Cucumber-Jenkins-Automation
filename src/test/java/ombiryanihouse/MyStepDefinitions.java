@@ -140,7 +140,7 @@ public class MyStepDefinitions {
     // 🔹 Mobile
     @Given("user opens website on mobile device {string}")
     public void user_opens_website_on_mobile(String device) {
-        driver.manage().window().setSize(new Dimension(375, 812));
+        driver.manage().window().setSize(new Dimension(360, 800));
         driver.get("https://ombiryanihouse.wordpress.com/");
     }
 
