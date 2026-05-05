@@ -8,6 +8,5 @@
 
 
      
-      🔗 - Website URL -
-   
-         - 🌐 [Visit Om Biryani House Website]-(https://ombiryanihouse.wordpress.com/)
+       🔗 - Website URL -
+          - 🌐 [Visit Om Biryani House Website]-(https://ombiryanihouse.wordpress.com/)
