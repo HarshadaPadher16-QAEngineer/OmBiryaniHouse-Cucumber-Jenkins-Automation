@@ -8,11 +8,6 @@
 3. Successfully executed 4 test scenarios for Om Biryani House website using Selenium and Java.
  
 
-
-
-
-
-
     🔗 - Website URL - 
    - 🌐 [Visit Om Biryani House Website]-(https://ombiryanihouse.wordpress.com/)
 
